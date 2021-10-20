@@ -1,0 +1,95 @@
+*{
+	overflow:visible !important;
+}
+body{
+	overflow:hidden;
+	background:white;
+	/*font-size: 12pt;*/
+	color:black !important;
+	/*width:1000px;*/
+	margin:none;
+	padding:none;
+}
+#searchandlanguage, #t1navlinks, #headerrow3, .loginlink{display:none;}
+#gvheaderlogo{position:relative;display:block;clear:both;float:none;}
+#gvheaderlogo img{float:none;height:60px;}
+
+#breadcrumbnav {color:black !important;font-size:14px !important; font-weight:bold;}
+#breadcrumbnav a {color:black !important;font-size:14px !important; font-weight:bold;}
+
+#headerarea{
+	width:100% !important;
+	display:none;
+}
+#contentarea{
+	width:100% !important;
+	background:transparent;
+	margin-left:0px !important;
+	margin-right:0px !important;
+	padding:0px !important;
+}
+
+a:link, a:visited {
+	color:#006;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.page-columnset{
+	position:relative;
+	display:block;
+	float:none;
+	width:100% !important;
+	background:transparent;
+	margin:none;
+	padding:none;
+}
+.page-column{
+	position:relative;
+	display:block;
+	float:none;
+	width:100% !important;
+	background:transparent;
+	margin:none;
+	padding:none;
+}
+.page-component{
+	color:black !important;
+	position:relative;
+	display:block;
+	float:none !important;
+	overflow:visible;
+	position:relative;
+	border:0px !important;
+	background:transparent;
+	height:auto;
+	margin:none;
+	padding:none;
+	width:100% !important;
+}
+.isbox{
+	background:transparent;
+	border-bottom:1px solid black;
+}
+/* hide interactive-only component types */
+.ComponentTypeWorkflow{
+	display:none;
+}
+/* turn off corners */
+.jrCorner{
+	display:none;
+	visibility:hidden;
+}
+
+
+/* from another client...
+#footer {display:none !important;}
+#contentwrapper,#breadcrumbs,#bodycontent,#footer{width:100% !important;}
+.pagecolumn {width:100% !important;}
+.pagecolumnset {width:100% !important;}
+.printlogo{display:inline !important;}
+.widget{float:none !important;overflow:visible;position:relative;border:0px !important;}
+.episodeTranscriptHead { display:none; }
+.noprint { display:none; }
+*/

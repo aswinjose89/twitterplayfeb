@@ -1,0 +1,85 @@
+<!--
+#title           : index.ejs
+#description     : Home page
+#author		       : Nikul Prajapati
+#email           : nikulprajapati90@gmail.com
+#date            : 20150717
+#version         : 1.0
+-->
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/twitter_card.css">
+</head>
+<body>
+  <p><%=influential_users_data.length%></p>
+  <div class="container">
+
+  <% for(var i=0; i<influential_users_data.length; i++) {
+    var name = influential_users_data[i].name;
+    var screen_name = influential_users_data[i].screen_name;
+    var followers_count = influential_users_data[i].followers_count_display;
+    var friends_count = influential_users_data[i].friends_count_display;
+    var profile_banner_url = influential_users_data[i].profile_banner_url;
+    var statuses_count = influential_users_data[i].statuses_count_display;
+    var profile_image_url = influential_users_data[i].profile_image_url;
+  %>
+  <div class="row">
+  <!-- code start -->
+  <div class="twPc-div">
+      <a class="twPc-bg twPc-block">
+      </a>
+  	<div>
+  		<div class="twPc-button">
+              <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+              <a href=https://twitter.com/<%=screen_name%> class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @<%=screen_name%></a>
+              <!-- Twitter Button -->
+  		</div>
+
+  		<a title="Mert Salih Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+  			<img alt="Mert Salih Kaplan" src=<%=profile_image_url%> class="twPc-avatarImg">
+  		</a>
+
+  		<div class="twPc-divUser">
+  			<div class="twPc-divName">
+  				<a href="https://twitter.com/mertskaplan"><%=name %></a>
+  			</div>
+  			<span>
+  				<a href="https://twitter.com/mertskaplan">@<span><%=screen_name%></span></a>
+  			</span>
+  		</div>
+
+  		<div class="twPc-divStats">
+  			<ul class="twPc-Arrange">
+  				<li class="twPc-ArrangeSizeFit">
+  					<a href="https://twitter.com/mertskaplan" title="9.840 Tweet">
+  						<span class="twPc-StatLabel twPc-block">Tweets</span>
+  						<span class="twPc-StatValue"><%=statuses_count%></span>
+  					</a>
+  				</li>
+  				<li class="twPc-ArrangeSizeFit">
+  					<a href="https://twitter.com/mertskaplan/following" title="885 Following">
+  						<span class="twPc-StatLabel twPc-block">Following</span>
+  						<span class="twPc-StatValue"><%=friends_count%></span>
+  					</a>
+  				</li>
+  				<li class="twPc-ArrangeSizeFit">
+  					<a href="https://twitter.com/mertskaplan/followers" title="1.810 Followers">
+  						<span class="twPc-StatLabel twPc-block">Followers</span>
+  						<span class="twPc-StatValue"><%=followers_count%></span>
+  					</a>
+  				</li>
+  			</ul>
+  		</div>
+  	</div>
+  </div>
+  <!-- code end -->
+  </div>
+  <% } %>
+
+  </div>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</body>
+</html>

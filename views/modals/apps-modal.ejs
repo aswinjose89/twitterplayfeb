@@ -1,0 +1,50 @@
+<div id="apps-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-sm modal-dialog modal-dialog-top">
+        <div class="modal-content">
+            <!-- Apps card -->
+            <div class="card m-b-0">
+                <div class="card-header bg-app bg-inverse">
+                    <h4>Apps</h4>
+                    <ul class="card-actions">
+                        <li>
+                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-block">
+                    <div class="row text-center">
+                        <div class="col-xs-6" Style="width:48%;">
+                            <a href="admin" target="new"
+                               class="card card-block m-b-0 bg-app-secondary bg-inverse">
+                                <i class="ion-person fa-4x"></i>
+                                <p>Admin</p>
+                            </a>
+                        </div>
+                        <div class="col-xs-6" Style="width:52%;">
+                            <a href="http://tweetzoomui.azurewebsites.net/" target="new"
+                               class="card card-block m-b-0 bg-app-tertiary bg-inverse">
+                                <i class="ion-laptop fa-4x"></i>
+                                <p>Frontend</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="card-block" style="border-top: 1px solid gray">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="text-center">Settings</h3>
+                                <div class="col-xs-8">
+                                    <label>Heap Measure Popup</label>
+                                    <input id="heap-toggle" type="checkbox" checked data-toggle="toggle" onchange="heapToggleSettings(this)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .card-block -->
+            </div>
+            <!-- End Apps card -->
+        </div>
+    </div>
+</div>

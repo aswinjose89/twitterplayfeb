@@ -1,0 +1,1333 @@
+<!--
+   #title           : profile.ejs
+   #description     : Main dashboard
+   #author		      : Aswin Jose
+   #email           : aswin1906@gmail.com
+   #date            : 20190210
+   #version         : 1.2
+   -->
+<!-- views/profile.ejs -->
+<!doctype html>
+<html lang="en">
+<html class="app-ui" ng-app="profileMod">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- Document title -->
+    <title>TweetZoom To Process Live Twitter Tweets</title>
+    <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework"/>
+    <meta name="author" content="rustheme"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/static/img/favicons/apple-touch-icon.png"/>
+    <link rel="icon" href="/static/img/favicons/favicon.ico"/>
+    <!-- Google fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400"/>
+    <link href="/static/css/bootstrap/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/js/plugins/bootstrap-multiselect/bootstrap-multiselect.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/js/plugins/angularjs/css/angular-material.css"/>
+    <!-- Pelias Map Styles -->
+    <link rel="stylesheet" href="/static/js/plugins/map-leaflet/css/leaflet.css" />
+    <link rel="stylesheet" href="/static/js/plugins/map-leaflet/css/MarkerCluster.css" />
+    <link rel="stylesheet" href="/static/js/plugins/map-leaflet/css/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href='/static/js/plugins/map-leaflet/css/leaflet.fullscreen.css' rel='stylesheet' />
+    <!-- AppUI CSS stylesheets -->
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <link rel="stylesheet" href="/static/bootbox/css/main.css">
+    <link rel="stylesheet" href="/static/mycss.css">
+    <link rel="stylesheet" id="css-font-awesome" href="/static/css/font-awesome.css"/>
+    <link rel="stylesheet" id="css-ionicons" href="/static/css/ionicons.css"/>
+    <link rel="stylesheet" id="css-bootstrap" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" id="css-bootstrap1" href="/static/css/glyphicons.css"/>
+    <link rel="stylesheet" id="css-app" href="/static/css/app.css"/>
+    <link rel="stylesheet" id="css-app-custom" href="/static/css/app-custom.css"/>
+    <link rel="stylesheet" href="/static/js/insta.style.css">
+    <link rel="stylesheet" href="/static/flipclock/flipclock.css">
+    <!-- AppUI CSS stylesheets -->
+    <style type="text/css">
+        body, td, th {
+            color: #000000;
+        }
+        <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+                        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <link id="ie-style" href="/static/css/ie.css" rel="stylesheet">
+        <![endif]-->
+
+        <!--[if IE 9]>
+                     <link id="ie9style" href="/static/css/ie9.css" rel="stylesheet">
+        <![endif]
+
+          .app-ui .app-ui.layout-has-drawer.layout-has-fixed-header .row .col-lg-6 .card .card-header.bg-green.bg-inverse {
+              color: #FFF;
+          }
+
+        .app-ui.layout-has-footer {
+            height: auto;
+            width: 5%;
+        }
+
+        body {
+            background: #ded9d9 url(/static/img/bg.png) left top repeat;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        -->
+    </style>
+    <script>
+      var appSettings = <%- appSettings %>;
+    </script>
+    <!-- End Stylesheets -->
+</head>
+<body class="app-ui layout-has-drawer layout-has-fixed-header" ng-controller="profileController" ng-cloak>
+  <div class="bb-alert alert" style="display:none;">
+    <span style="length:100%">The examples populate this alert with dummy content</span>
+  </div>
+  <img id="loading-indicator" name="Loader">
+<div class="app-layout-canvas">
+    <div class="app-layout-container">
+        <!-- Drawer -->
+
+        <!-- End drawer -->
+        <!-- Header -->
+        <header class="app-layout-header" style="padding-left: 0px;padding-bottom: 5px;">
+            <nav class="navbar-default">
+                <div class="container-fluid">
+<!--                    <div class="navbar-header">-->
+<!--                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"-->
+<!--                                data-target="#header-navbar-collapse" aria-expanded="false">-->
+<!--                            <span class="sr-only">Toggle navigation</span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                        </button>-->
+<!--                        <button class="pull-left hidden-lg hidden-md navbar-toggle" type="button" data-toggle="layout"-->
+<!--                                data-action="sidebar_toggle">-->
+<!--                            <span class="sr-only">Toggle drawer</span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                            <span class="icon-bar"></span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                    <div class="collapse navbar-collapse">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="navbar-header">
+                                    <button type="button" style="display: block" id="sidebarCollapse" class="navbar-toggle collapsed" data-toggle="collapse"
+                                            data-target="#header-navbar-collapse" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                            </div>                            
+                            <div class="col-md-1">
+                                <div id="logo" class="drawer-header" style="width:100%">
+                                    <a href="http://tweetzoomui.azurewebsites.net/" target="new">
+                                        <img class="img-responsive" style="width: 100%" src="/static/img/logo/logo-backend.png"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-8" style="transform: translateY(23%)">
+                                <div>
+                                    <div class="col-md-2">
+                                        <div class="btn btn-app-blue container-shadow"
+                                             style="padding:3px; width:100%;">
+                                            <div class="pull-right">
+                                                <tr>
+                                                    <td>
+                                                        <p class="h3 text-muted m-t-0 m-b-xs">
+                                                                <span style="font-size: 100%">
+                                                                    <font color="#FFFFFF">Total Tweets</font>
+                                                                </span>
+                                                        </p>
+                                                        </font></span>
+                                                    </td>
+                                                    <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                    id="totalTweets" color="#000000">0</font></span>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                            <div class="pull-left m-r">
+                                                <i class="ion-ios-people fa-1-5x"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .col-sm-6 -->
+                                    <div class="col-md-2">
+                                        <div class="btn btn-app-blue container-shadow"
+                                             style="padding:3px; width:100%;">
+                                            <div class="pull-right">
+                                                <tr>
+                                                    <td>
+                                                        <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                    style="font-size: 100%"> <font color="#FFFFFF">Total ReTweets
+                                                        </p>
+                                                        </font></span>
+                                                    </td>
+                                                    <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                    id="totalReTweets" color="#000000">0</font></span>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                            <div class="pull-left m-r">
+                                                <i class="icon ion-loop fa-1-5x"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .col-sm-6 -->
+                                    <div class="col-md-2">
+                                        <div class="btn btn-app-blue container-shadow" style="padding:3px;width:100%;">
+                                            <div class="pull-right">
+                                                <tr>
+                                                    <td>
+                                                        <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                    style="font-size: 100%"> <font color="#FFFFFF">ReTweets %
+                                                        </p>
+                                                        &nbsp;&nbsp;</font></span>
+                                                    </td>
+                                                    <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                    id="reTweetsPercentage"
+                                                                    color="#000000">0</font></span></td>
+                                                </tr>
+                                            </div>
+                                            <div class="pull-left m-r">
+                                                <i class="ion-ios-speedometer fa-1-5x"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .col-sm-6 -->
+                                    <div class="col-md-2">
+                                        <div class="btn btn-app-blue container-shadow" style="padding:3px;width:100%;">
+                                            <div class="pull-right">
+                                                <tr>
+                                                    <td>
+                                                        <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                    style="font-size: 100%"> <font color="#FFFFFF">Buffered tweets
+                                                        </p>
+                                                        </font></span>
+                                                    </td>
+                                                    <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                    id="lagging_btw_client_server"
+                                                                    color="#000000">0</font></span></td>
+                                                </tr>
+                                            </div>
+                                            <div class="pull-left m-r">
+                                                <i class="ion-social-buffer fa-1-5x"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="responseTime timerContainer">                                                               &nbsp;
+                                            <div class="col-md-12 your-clock" id="timer_clock"></div>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-1" style="padding-top:1%">
+                                      <select id="country_languages" multiple="multiple">
+                                      </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row pull-right">
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle collapse" data-toggle="collapse"
+                                                    data-target="#header-navbar-collapse" aria-expanded="false">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+                                        <ul class="nav navbar-nav navbar-left navbar-toolbar hidden-sm hidden-xs">
+                                            <li>
+                                                <!-- Opens the modal found at the bottom of the page -->
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#apps-modal"><i
+                                                            class="ion-grid"></i></a>
+                                            </li>
+                                        </ul>
+                                        <a href="#" style="position:relative;top:12px;padding: 9px 10px;">
+                                            <img src="<%= user.twitter.imageUrl %>" alt=""
+                                                 style="width:30px; height:30px;" class="img-rounded"/>
+                                          </a>
+                                          <a type="button" style="position:relative;top:12px;padding: 9px 10px;" class="btn btn-pill btn-app-blue-outline"
+                                             ng-click="logout()" href="javascript:void(0)"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+            <!-- .navbar-default -->
+        </header>
+        <!-- End header -->
+        <main class="app-layout-content" style="padding-left: 0px">
+            <div class="wrapper">
+                <!-- Sidebar  -->
+                <% include master_pages/sidebar %>
+                <!-- End Sidebar  -->
+
+                <!-- Page Content  -->
+                <div id="content">
+                    <div class="section-title section-auto-centre">
+                        <div class="col-md-12">
+                          <form class="form-wrapper cf">
+                              <div class="row">
+                                <span class="searchButton">
+                                    <i class="fa fa-search barIcon" id="iconInputSearch" ng-click="customSearch()" title="Do Search..."></i>
+                                    <label class="fa fa-paperclip barIcon" aria-hidden="true" title="Select File to load keywords..File type:text/xls/csv">
+                                        <input type="file" id="customSearchFiles1" name="files[]" multiple style="display:none"/>
+                                    </label>
+                                </span>
+                                <input type="text" id="inputkeyword" class="searchTerm add-todo" placeholder="comma separated keywords/ hashtag..." autocomplete="off">
+                                <div class="tz-btn-group pull-right">
+                                  <button  type="button" data-toggle="tooltip" data-placement="top" ng-click="customSearch()" title="Do Search..." class="custom-search">Search</button>
+                                  <button  type="button" id="uploadBtn" class="btn-border btn-width-30" data-toggle="tooltip" data-placement="top" title="Select File to load keywords..File type:text/xls/csv">Attach
+
+                                  </button>
+                                  <input type="file" id="customSearchFiles2" name="files[]" multiple style="display:none"/>
+                                  <select name="sources" id="sources" class="custom-select sources btn-border" placeholder="CUSTOM KEYWORDS">
+                                    <option selected id="btn_custom_keyword" value="profile">CUSTOM KEYWORDS</option>
+                                    <option value="word" id="btn_all_hashtag">ALL HASHTAGS</option>
+                                    <option value="hashtag" id="btn_all_keyword">ALL KEYWORDS</option>
+                                  </select>
+                                  <!-- <button id="btn_all_keyword" type="button" class="btn-border btn-radius btn-width-35" data-toggle="tooltip" data-placement="top" title="Tracking started for all keywords">ALL KEYWORDS</button> -->
+                                  <!-- <button id="btn_custom_keyword" name="btn_custom_keyword" type="button" data-toggle="tooltip" data-placement="top" title="Enter hashtag or keyword in the textbox provided" class="custom-search">CUSTOM KEYWORDS</button>
+                                  <button id="btn_all_hashtag" type="button" class="btn-border btn-width-30" data-toggle="tooltip" data-placement="top" title="Tracking started for all hashtag">ALL HASHTAGS</button>
+                                  <button id="btn_all_keyword" type="button" class="btn-border btn-radius btn-width-35" data-toggle="tooltip" data-placement="top" title="Tracking started for all keywords">ALL KEYWORDS</button> -->
+                                </div>
+                              </div>
+                              <div class="btn-group-vertical" style="position:relative;top:10px;width:100%;height:100%">
+                                <ul id="sortable" class="list-inline" style="overflow-y:auto;overflow-x:auto;">
+                                </ul>
+                              </div>
+                          </form>
+                            <div class="col-md-12 clr-black heap-size" style="padding: 14px;border-radius: 30px 30px 0px 0px;z-index: 99;">  
+                                <a href="#" ng-click="closeHeapCard($event);" class="heap-close"></a>                              
+                                <span id="heapPercent"></span>% Heap Size Used 
+                                <div class="progress progress-striped active">
+                                    <div id="progressBar" class="bar" style="min-width: 1%;"></div>
+                                </div>
+                                <div style="border-top: 1px dotted gray;margin-bottom: 7px;padding-top: 7px;"><span id="heapDtls"></span> MB </div>
+                            </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                          <div class="col-lg-6">
+                              <!-- Live Tweets -->
+                              <div class="card">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                      <h5>
+                                          <label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Live
+                                                  Tweets </i>
+                                          </label>
+                                      </h5>
+                                      <div class="col-md-6">
+                                        <a class="btn btn-primary" href="processLiveTweets" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                          <i class="fa fa-external-link"></i><span style="margin-left:2px">Process Live Tweets</span>
+                                        </a>
+                                      </div>
+  <!--                                    <a href="live_tweets" target="_blank" style="border-radius: 10px">-->
+  <!--                                        View All</a>-->
+  <!--                                    </a type="icon" class="btn btn-default btn-sm-custom"  onclick="getTweetsFile()"[iframe]>-->
+  <!--                                    <a href="" target="top"><span><img src="/static/img/Folder_Win_Download.png"-->
+  <!--                                                                       name="image" width="28" height="25"-->
+  <!--                                                                       class="dl-horizontal" title="Download Files"></span></a>-->
+                                      <ul class="card-actions">
+                                          <li>
+                                              <button type="button" target="top" class="fa fa-download" ng-click="getTweetsFile()"[iframe]>
+                                              </button>
+                                          </li>
+                                          <li>
+                                              <a target="_blank" href="processLiveTweets" class="fa fa-external-link" aria-hidden="true"></a>
+                                          </li>
+  <!--                                        <li>-->
+  <!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+  <!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+  <!--                                        </li>-->
+                                          <li>
+                                              <button type="button" data-toggle="card-action"
+                                                      data-action="content_toggle"></button>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="card-block">
+                                      <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                            onsubmit="return false;">
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <div id="main" style="height:475px; overflow-y:auto;background: aliceblue">
+                                                      <!-- <ul id="messages"></ul> --></div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- .card-block -->
+                              </div>
+                              <!-- .card -->
+                              <!-- End Live Tweets -->
+                          </div>
+
+                          <!-- .col-lg-4 -->
+                          <div class="col-lg-6">
+                              <!-- Most retweeted tweets -->
+                              <div class="card">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                      <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Most
+                                                  retweeted tweets</i></label></h5></i>
+  <!--                                    </a type="icon" class="btn btn-default btn-sm-custom"  ng-click="getMaxReTweetsFile()"-->
+  <!--                                    [iframe]><a href="" target="top"><span><img src="/static/img/Folder_Win_Download.png"-->
+  <!--                                                                                name="image" width="28" height="25"-->
+  <!--                                                                                class="dl-horizontal"-->
+  <!--                                                                                title="Download Files"></span></a>-->
+                                      <ul class="card-actions">
+                                          <li>
+                                              <button type="button" data-toggle="card-action" ng-click="getMaxReTweetsFile()" data-action="refresh_toggle"
+                                                      data-action-mode="demo"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                          </li>
+  <!--                                        <li>-->
+  <!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+  <!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+  <!--                                        </li>-->
+                                          <li>
+                                              <button type="button" data-toggle="card-action"
+                                                      data-action="content_toggle"></button>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="card-block">
+                                      <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                            onsubmit="return false;">
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <div id="retweets_window" style="height:475px; overflow-y: auto;background: aliceblue"></div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- .card-block -->
+                              </div>
+                              <!-- .card -->
+                              <!-- End Most retweeted tweets -->
+                          </div>
+                          <!-- .col-lg-4 -->
+                          <div class="container-fluid p-y-md">
+                          </div>
+
+                          <div class="col-lg-4">
+                              <!-- Most retweeted tweets -->
+                              <div class="card">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                      <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Tweets Details</i></label></h5></i>
+                                  </div>
+                                  <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <div id="tweet_dtls"></div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- .card-block -->
+                              </div>
+                              <!-- .card -->
+                              <!-- End Most retweeted tweets -->
+                          </div>
+                          <div class="col-lg-4">
+                              <!-- Most retweeted tweets -->
+                              <div class="card">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                      <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Device Info</i></label></h5></i>
+                                  </div>
+                                  <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <div id="twts_source"></div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- .card-block -->
+                              </div>
+                              <!-- .card -->
+                              <!-- End Most retweeted tweets -->
+                          </div>
+                          <div class="col-lg-4">
+                              <div class="card">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                      <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Processed Tweets</i></label></h5></i>
+                                  </div>
+                                  <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <div class="row">
+                                                     <div class="col-md-3" style="position:absolute;left:10px;z-index:1">
+                                                       <select class="form-control" id="twtsTimeRange" onchange="getProcessedTwtsCnt(this)">
+                                                           <option value="days" selected=true>Daily</option>
+                                                           <option value="weeks">Weekly</option>
+                                                           <option value="months">Monthly</option>
+                                                         </select>
+                                                     </div>
+                                                  </div>
+                                                  <div id="total_user_twts"></div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- .card-block -->
+                              </div>
+                            </div>
+                          <div class="container-fluid p-y-md">
+                          </div>
+                            <!-- <div class="card card-radius card-design">
+                                <nav class=" card-radius">
+
+                                    <div class="btn-group-vertical">
+                                        <button name="btn_custom_keyword" type="button"
+                                                class="btn btn-pill btn-app-blue-outline" id="btn_custom_keyword"
+                                                title="Enter hashtag or keyword in the textbox provided"
+                                                data-toggle="tooltip" data-placement="left">Track custom keywords
+                                        </button>
+                                        <button id="btn_all_hashtag" class="btn btn-pill btn-app-blue-outline"
+                                                data-toggle="tooltip" data-placement="left"
+                                                title="Tracking started for all hashtag" type="button">Track all hashtags
+                                        </button>
+                                        <button id="btn_all_keyword" class="btn btn-pill btn-app-blue-outline"
+                                                data-toggle="tooltip" data-placement="left"
+                                                title="Tracking started for all keywords" type="button">Track all keywords
+                                        </button>
+                                    </div>
+                                    <div class="btn-group-vertical">
+                                        <div class="search">
+                                            <input id="inputkeyword" class="searchTerm add-todo"  type="text" disabled="true" placeholder="comma separated keywords/ hashtag">
+                                            <button type="submit" class="searchButton" onclick="customSearch()">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-group-vertical">
+                                            <ul id="sortable" class="list-inline"
+                                                style="height:80px;  width:300px; overflow-y:auto;overflow-x:auto;"></ul>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div> -->
+                            <!-- .card-block -->
+                            <!-- .card -->
+                            <!-- End jQuery Tags Input -->
+                            <!-- End jQuery Tags Input -->
+                            <!-- Page Content -->
+                            <!-- Stats -->
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Tweets - English</font></span></p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="englishcount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-ios-people fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Tweets - Spanish</font></span></p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="spanishcount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-ios-people fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Tweets with GPS</font></span></p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="gpscount" color="#000000">0</font></span></td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="icon ion-loop fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 90%"> <font color="#FFFFFF">Twts with profile location
+                                                                    </font>
+                                                                </span>
+                                                            </p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="locationcount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-clock fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Hashtag Tweets</p>
+                                                            &nbsp;&nbsp;</font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="hashtagtweets" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-ios-speedometer fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Mentioned Tweets</p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="mentionedtweets" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-social-buffer fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Stats -->
+                                    </div>
+                                    <!-- Page Content -->
+                                    <div class="container-fluid p-y-md"></div>
+                                    <div class="row">
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%">
+                                                            <font color="#FFFFFF">Sentiment(English)</font></span></p>
+                                                        </td>
+                                                        <label class="css-input switch switch-sm switch-primary">
+                                                            <td><input type="checkbox" id="register1-terms"
+                                                                       name="register1-terms">Off<span></span>On
+                                                            </td>
+                                                        </label>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="icon ion-ios-bell fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td><p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Positive</font></span></p>
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="posSentCount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="icon ion-plus-circled fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Negative</font></span></p></td>
+                                                        <td>
+                                                            <span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="negSentCount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="icon ion-minus-circled fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td><p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Neutral</font></span>
+                                                            </p>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="neutralSentCount"
+                                                                        color="#000000">0</font></span></td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-android-funnel fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100"
+                                                 style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td><p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font
+                                                                            color="#FFFFFF">Total</font></span>
+                                                            </p>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="totalsenticount" color="#000000">0</font></span>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-ios-people fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .col-sm-6 -->
+                                        <div class="col-md-2">
+                                            <div class="btn btn-app-blue container-shadow w-100" style="height: 65px;">
+                                                <div class="pull-right">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="h3 text-muted m-t-0 m-b-xs"><span
+                                                                        style="font-size: 100%"> <font color="#FFFFFF">Tweets/Minute
+                                                                    </font>
+                                                                </span>
+                                                            </p>
+                                                            </font></span>
+                                                        </td>
+                                                        <td><span class="label label-primar" style="font-size: 100%"> <font
+                                                                        id="throughput" color="#000000">0</font></span></td>
+                                                    </tr>
+                                                </div>
+                                                <div class="pull-left m-r">
+                                                    <i class="ion-clock fa-1-5x"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="btn-group-vertical" style="background: #efefef;padding: 5px;border-radius: 10px;box-shadow: 2px 1px 5px 4px rgba(0,0,0,0.75);">
+                                        <div id="lang_title" style="text-align:center;padding: 5px;">
+                                            <span class="label" style="font-size: 12pt;font-weight: bold;"> <font color="#358ed7">Language Info </font> </span>
+                                        </div>
+                                        <div id="lang_stats" style="float: right; height:145px;overflow-y: auto; ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3">
+                                    <div id="download_data_title">
+                                        <span class="label" style="font-size: 100%"> <font color="#0099FF">Download data files:</font> </span>
+                                    </div>
+                                    <div class="btn-group-vertical" style="float: right; width:100%">
+                                        <button type="button" id="download_words_excel" class="btn btn-primary" style="height:30px; width:100%" ng-click="getTopKeywordsFile()"[iframe]>Top Keywords</button>
+                                        <button type="button" id="download_tweets_excel" class="btn btn-primary" style="height:30px;" ng-click="getTweetsFile()"[iframe]>All tweets</button>
+                                        <button type="button" id="download_influential_users_excel" class="btn btn-primary" style="height:30px;" ng-click="getTopKMostInfluentialUsersFile()"[iframe]>Most influential users</button>
+                                        <button type="button" id="download_active_users_excel" class="btn btn-primary" style="height:30px;" ng-click="getTopKMostActiveUsersFile()"[iframe]>Most active users</button>
+                                        <button type="button" id="download_retweets_excel" class="btn btn-primary" style="height:30px;" ng-click="getMaxReTweetsFile()"[iframe]>Most retweeted tweets</button>
+                                        <button type="button" id="download_pos_tweets_excel" class="btn btn-primary" style="height:30px;"  ng-click="getPosTweetsFile()"[iframe]>Positive tweets</button>
+                                        <button type="button" id="download_neg_tweets_excel" class="btn btn-primary" style="height:30px;" ng-click="getNegTweetsFile()"[iframe]>Negative tweets</button>
+                                        <button type="button" id="download_neutral_tweets_excel" class="btn btn-primary" style="height:30px;" ng-click="getNeutralTweetsFile()"[iframe]>Neutral tweets</button>
+                                    </div>
+                                    <p id="download"></p>
+                                </div> -->
+                            </div>
+                        </div>                        
+                          <div class="container-fluid p-y-md">
+                          </div>
+                        <div class="col-lg-6 tz-col-md-change">
+                            <!-- Top Keywords cloud -->
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                    <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Top
+                                                Keywords cloud</i></label></h5></i>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button type="button" data-toggle="card-action" ng-click="getTopKeywordsFile()" data-action="refresh_toggle"
+                                                    data-action-mode="demo"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="container-middle" id="wordcloud" style="height:700px"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- .card-block -->
+                            </div>
+                            <!-- .card -->
+                            <!-- End Top Keywords cloud -->
+                        </div>
+                        <div class="col-lg-6 tz-col-md-change">
+
+                                    <!-- Top Hashtags cloud -->
+                                    <div class="card">
+                                        <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                            <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Top
+                                                        Hashtags Cloud</i></label></h5></i>
+                                            <ul class="card-actions">
+                                                <li>
+                                                    <button type="button" data-toggle="card-action" ng-click="getTopKeywordsFile()" data-action="refresh_toggle"
+                                                            data-action-mode="demo"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" data-toggle="card-action"
+                                                            data-action="content_toggle"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-block">
+                                            <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                                  onsubmit="return false;">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="container-middle" id="hashtag_wordcloud" style="height:700px"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- .card-block -->
+                                    </div>
+                            <!-- .card -->
+                            <!-- End Top Hashtags Cloud  -->
+                        </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                        <!-- Company overview Chart -->
+                        <div class="col-lg-12 tz-col-md-change">
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:12px;">
+                                    <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Google
+                                                trend</i></label></h5>
+                                    <ul class="card-actions">
+<!--                                        <li>-->
+<!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+<!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+<!--                                        </li>-->
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block p-b-0 bg-white bg-inverse">
+                                    <div class="panel-body">
+                                        <iframe id="google_iframe" scrolling="no" style="border:none; width: 100%"
+                                                height="380" src=""></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .card -->
+                        </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                        <h5>
+                                            <label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>
+                                                    Tweets Process Timeline </i>
+                                            </label>
+                                        </h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                              onsubmit="return false;">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                  <div class="tweetsTimelineChart">
+                                                      <canvas id="tweetTlChart" width="100%" height="20%" style="background: aliceblue;"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- .card-block -->
+                                </div>
+                              </div>
+                          </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                        <!-- .col-lg-8 -->
+                        <!-- End Company overview Chart -->
+                        <div class="col-lg-12 tz-col-md-change">
+                            <!-- Top Keywords cloud -->
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                    <h5 style="width: 50%;"><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg">
+                                                <class="btn btn-app btn-block" data-toggle="popover" data-placement="right"
+                                                data-content="Most influential users (Based on number of followers)" >&nbsp;Most
+                                                influential users </i></label></h5>
+<!--                                    <button type="button" class="btn btn-success btn-sm-custom"-->
+<!--                                            onclick="getTopKMostInfluentialUsersFile" [iframe]></span><img-->
+<!--                                                src="/static/img/Folder_Win_Download.png" name="image" width="25"-->
+<!--                                                height="25" class="dl-horizontal" title="Download Files"></a></span>-->
+<!--                                    </button>-->
+                                        <div class="col-md-6">
+                                          <a class="btn btn-primary"href="influential_users" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                            <i class="fa fa-external-link"></i><span style="margin-left:2px">Follow multiple users</span>
+                                          </a>
+                                        </div>
+                                    <ul class="card-actions">
+                                      <!-- <li>
+                                        <a target="_blank" href="influential_users" style="border-radius: 20px;text-decoration: underline;">
+                                            Follow multiple users
+                                        </a>
+                                      </li> -->
+                                      <li>
+                                        <button type="button" ng-click="influentialUsrCardToggle($event)" style="text-decoration: underline;"> View More</button>
+
+                                      </li>
+                                        <li>
+                                            <button type="button" class="btn btn-success btn-sm-custom"
+                                                    ng-click="getTopKMostInfluentialUsersFile()" [iframe]>
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                            </button>
+
+                                        </li>
+                                        <!-- <li>
+                                            <a target="_blank" href="influential_users" class="fa fa-external-link" aria-hidden="true"></a>
+                                        </li> -->
+<!--                                        <li>-->
+<!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+<!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+<!--                                        </li>-->
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block"  style="background-image: linear-gradient(#c5c9ce,#c5c9ce);">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <ul id="max_followers_ul" class="list-inline img-control" style="margin-top:10px"></ul>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- .card-block -->
+                            </div>
+                            <!-- .card -->
+                            <!-- End Top Keywords cloud -->
+                        </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                        <div class="col-lg-12 tz-col-md-change">
+                            <!-- Top Keywords cloud -->
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                    <h5 style="width: 50%;"><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg">
+                                                <class
+                                                ="btn btn-app btn-block" data-toggle="popover" data-placement="right"
+                                                data-content="Most active users (Based on total tweets)" >&nbsp;Most active
+                                                users </i></h5></label>
+
+                                                <div class="col-md-6">
+                                                  <a class="btn btn-primary" href="active_users" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                                    <i class="fa fa-external-link"></i><span style="margin-left:2px">Follow multiple users</span>
+                                                  </a>
+                                                </div>
+                                    <ul class="card-actions">
+                                        <!-- <li>
+                                          <a target="_blank" href="active_users" style="border-radius: 20px;text-decoration: underline;">
+                                              Follow multiple users
+                                          </a>
+                                        </li> -->
+                                        <li>
+                                          <button type="button" ng-click="activeUsrCardToggle($event)" style="text-decoration: underline;"> View More</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btn btn-success btn-sm-custom"
+                                                    ng-click="getTopKMostActiveUsersFile()" [iframe]>
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                            </button>
+                                        </li>
+                                        <!-- <li>
+                                            <a target="_blank" href="active_users" class="fa fa-external-link" aria-hidden="true"></a>
+                                        </li> -->
+<!--                                        <li>-->
+<!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+<!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+<!--                                        </li>-->
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <ul id="max_tweets_ul" class="list-inline img-control"></ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- .card-block -->
+                            </div>
+                            <!-- .card -->
+                            <!-- End Top Keywords cloud -->
+                        </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                        <div class="col-lg-12 tz-col-md-change">
+                            <!-- Top Keywords cloud -->
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                    <h5 style="width: 50%;"><label for="most_mentioned_ul"><i class="fa fa-twitter fa_logo fa-lg">
+                    <class="btn btn-app btn-block" data-toggle="popover" data-placement="right"
+                          data-content="Most mentioned users (Based on number of mentions in the live
+                                                stream)" >&nbsp;Most mentioned users</></i></label></h5>
+                                    </i></label>
+                                    </span></i>
+                                    <div class="col-md-6">
+                                      <a class="btn btn-primary" href="mentioned_users" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                        <i class="fa fa-external-link"></i><span style="margin-left:2px">Follow multiple users</span>
+                                      </a>
+                                    </div>
+<!--                                    <button type="button" class="btn btn-success btn-sm-custom"-->
+<!--                                            onclick="getTopKMostMentionedUsersFile" [iframe]></span><img-->
+<!--                                                src="/static/img/Folder_Win_Download.png" name="image" width="25"-->
+<!--                                                height="25" class="dl-horizontal" title="Download Files"></a></span>-->
+<!--                                    </button>-->
+                                    <ul class="card-actions">
+                                      <!-- <li>
+                                        <a target="_blank" href="mentioned_users" style="border-radius: 20px;text-decoration: underline;">
+                                            Follow multiple users
+                                        </a>
+                                      </li> -->
+                                      <li>
+                                        <button type="button" ng-click="usrMentionCardToggle($event)" style="text-decoration: underline;"> View More</button>
+
+                                      </li>
+                                        <!-- <li>
+                                                <button type="button" class="btn btn-sm-custom"
+                                                        onclick="getTopKMostMentionedUsersFile()" [iframe]>
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                </button>
+                                        </li> -->
+                                        <!-- <li>
+                                            <a target="_blank" href="mentioned_users" class="fa fa-external-link" aria-hidden="true"></a>
+                                        </li> -->
+<!--                                        <li>-->
+<!--                                            <button type="button" data-toggle="card-action" data-action="refresh_toggle"-->
+<!--                                                    data-action-mode="demo"><i class="ion-refresh"></i></button>-->
+<!--                                        </li>-->
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block">
+                                    <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                          onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <ul id="most_mentioned_ul" class="list-inline img-control"></ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- .card-block -->
+                            </div>
+                            <!-- .card -->
+                            <!-- End Top Keywords cloud -->
+                        </div>
+                        <div class="container-fluid p-y-md">
+                        </div>
+                        <div class="col-lg-12 tz-col-md-change">
+                            <!-- Top Keywords cloud -->
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse" style="padding:10px;">
+                                    <h5><label for="most_mentioned_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Tweets
+                                                classification (Positive, Negative and Neutral)</i>
+                                            <label class="css-input css-checkbox css-checkbox-lg css-checkbox-default"></label>
+                                        </label>
+                                    </h5>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button type="button" data-toggle="card-action"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+<!--                                    <input id="sentimentClassificationFunction" checked type="checkbox" data-toggle="toggle" data-onstyle="info">-->
+                                    <!-- Tweets sentiment classification starts -->
+                                </div>
+                                <div class="card-block">
+                                    <div class="form-group">
+                                        <div class="panel-body">
+                                            <!-- Tweets sentiment classification starts -->
+                                            <div class="row" style="padding:0px 0px 0px 0px" id="posNegTweetsClassRow">
+                                                <div class="col-md-6 map">
+                                                    <div style="color: black;background: #e0e0e0;padding-left: 40px;border-radius: 4px 4px 0px 0px;box-shadow: 0 1px 3px #777;">
+                                                        <label for="max_retweets_ul">
+                                                            <h5><b style="font-weight: bold">Positive tweets:</b><span
+                                                                        class="fa fa-twitter fa_logo fa-lg" style="color: #358ed7"></span></h5>
+                                                        </label>
+                                                    </div>
+                                                    <div id="mainPos" style="height:420px;background: aliceblue;overflow-y: auto;padding: 9px;margin: 0px;box-shadow: 0 3px 3px #777;">
+                                                        <!-- <ul id="messages"></ul> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 map">
+                                                    <div style="color: black;background: #e0e0e0;padding-left: 40px;border-radius: 4px 4px 0px 0px;box-shadow: 0 1px 3px #777;">
+                                                        <label for="max_retweets_ul">
+                                                            <h5><b style="font-weight: bold">Negative tweets:</b> <span
+                                                                        class="fa fa-twitter fa_logo fa-lg" style="color: #358ed7"></span></h5>
+                                                        </label>
+                                                    </div>
+                                                    <div id="mainNeg" style="height:420px;background: aliceblue;overflow-y: auto;padding: 9px;margin: 0px;box-shadow: 0 3px 3px #777;">
+                                                        <!-- <ul id="messages"></ul> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </br>
+                                            <div class="row" style="padding:0px 0px 0px 0px;" id="neutralTweetsClassRow">
+                                                <div class="col-md-6 map">
+                                                    <div style="color: black;background: #e0e0e0;padding-left: 40px;border-radius: 4px 4px 0px 0px; box-shadow: 0 1px 3px #777;">
+                                                        <label for="max_retweets_ul">
+                                                            <h5><b style="font-weight: bold">Neutral tweets:</b> <span
+                                                                        class="fa fa-twitter fa_logo fa-lg" style="color: #358ed7"></span></h5>
+                                                        </label>
+                                                    </div>
+                                                    <div id="mainNeutral" style="height:420px;background: aliceblue;overflow-y: auto;padding: 9px;margin: 0px;box-shadow: 0 3px 3px #777;">
+                                                        <!-- <ul id="messages"></ul> -->
+                                                        <!-- Tweets sentiment classification ends -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                        <!-- .card-block -->
+                            </div>
+                                    <!-- .card -->
+                                    <!-- End Top Keywords cloud -->
+                                </div>
+                            </div>
+                            <div class="container-fluid p-y-md">
+                            </div>
+                            <!-- Weekly transactions Widget -->
+                            <div class="col-lg-14 tz-col-md-change">
+                                <div class="card">
+                                    <div class="card-header bg-blue bg-inverse" style="padding:12px;">
+                                        <h5><label for="most_mentioned_ul"><i span
+                                                                              class="fa fa-twitter fa_logo fa-lg"></span>&nbsp;Geo-locations
+                                                    for live tweets (where geo-cordinates are exposed/derived)</i></span>
+                                            </label></h5>
+                                        <ul class="card-actions">                                            
+                                            <li>
+                                                    <label for="most_mentioned_ul"><span style="font-weight: bold;">Profile Locations:</span> <span id="tweets_location_cnt_in_map" style="background: #8d741e;font-weight: bold;padding: 6px;"></span>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <button type="button" data-toggle="card-action" data-action="refresh_toggle" ng-click="refresh_map()"
+                                                        data-action-mode="demo"><i class="ion-refresh"></i></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="row">
+                                        <div class="card-block">
+                                            <div class="col-md-14">
+                                                <leaflet lf-center="center" controls="controls" markers="markers" layers="layers" event-broadcast="events" width="100%" height="480px"></leaflet>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- .card-actions -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <% include ./master_pages/footer %>
+
+        <!-- .app-layout-container -->
+    </div>
+    <!-- .app-layout-canvas -->
+    <!-- Apps Modal -->
+    <!-- Opens from the button in the header -->
+    <% include ./modals/apps-modal %>
+    <!-- End Apps Modal -->
+    <div class="app-ui-mask-modal"></div>
+
+    <!-- AngularJS Material Dependencies -->
+     <script src="/static/js/plugins/angularjs/1.7.7/angular.js"></script>
+     <script src="/static/js/plugins/angularjs/1.7.7/angular-animate.js"></script>
+     <script src="/static/js/plugins/angularjs/1.7.7/angular-aria.js"></script>
+     <script src="/static/js/plugins/angularjs/1.7.7/angular-messages.min.js"></script>
+ 
+     <!-- AngularJS Material Javascript using GitCDN to load directly from `bower-material/master` -->
+     <script src="https://gitcdn.xyz/cdn/angular/bower-material/master/angular-material.js"></script>
+    <!-- AppUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock and App.js -->
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>    
+    <script src="/static/js/core/jquery.min.js"></script>
+    <script src="/static/js/core/bootstrap.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.js"></script>
+    <script src="/static/js/core/jquery.slimscroll.min.js"></script>
+    <script src="/static/js/core/jquery.scrollLock.min.js"></script>
+    <script src="/static/js/core/jquery.placeholder.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/static/js/plugins/fullcalendar/moment.min.js"></script>
+    <script src="/static/js/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+
+    <script src="/static/socket.io/socket.io-1.3.5.js"></script>
+    <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
+    <script src="//d2wy8f7a9ursnm.cloudfront.net/v6/bugsnag.min.js"></script>
+    <script>window.bugsnagClient = bugsnag('2111bf766b3662c3a3999fe2b0521c84')</script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <!-- highcharts -->
+    <script src="/static/js/plugins/highlightjs/highcharts.src.js"></script>
+    <script src="/static/js/plugins/highlightjs/highcharts-3d.src.js"></script>
+    <script src="/static/js/plugins/highlightjs/exporting.src.js"></script>
+    <script src="/static/js/plugins/highlightjs/export-data.src.js"></script>
+    <script src="/static/js/plugins/highlightjs/wordcloud.src.js"></script>
+    <script src="/static/js/plugins/highlightjs/data.js"></script>
+    <script src="/static/js/plugins/highlightjs/series-label.js"></script>
+
+    <!-- Pelias Map -->
+    <script src="/static/js/plugins/map-leaflet/leaflet.js"></script>
+    <script src='/static/js/plugins/map-leaflet/Leaflet.fullscreen.min.js'></script>
+    <script src="/static/js/plugins/map-leaflet/leaflet.markercluster.js"></script>
+    <script src="/static/js/plugins/map-leaflet/angular-leaflet-directive.js"></script>
+    
+    <script src="/static/js/app/services/remoteCall.js"></script>
+    <script src="/static/js/app/dynamic_templates/templates.js"></script>
+    /* <script src="/static/js/app.js"></script> */
+    <script src="/static/js/app-custom.js"></script>
+    <script src="/static/d3js/d3.min.js"></script>
+    <script src="/static/bootbox/bootbox.min.js"></script>
+    <script src="/static/flipclock/flipclock.min.js"></script>
+    <script src="/static/js/utils/mixin.js"></script>
+    <script src="/static/myjs.js"></script>
+    <script>
+      !function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, "script", "twitter-wjs");
+        
+      </script>
+    <!-- Page JS Plugins -->
+</div>
+</body>
+</html>

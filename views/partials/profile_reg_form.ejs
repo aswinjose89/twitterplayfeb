@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Meta -->
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <!-- Document title -->
+      <title>TweetZoom 1.0</title>
+      <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework" />
+      <meta name="author" content="rustheme" />
+      <meta name="robots" content="noindex, nofollow" />
+      <!-- Favicons -->
+      <link rel="apple-touch-icon" href="/static/login/img/favicons/apple-touch-icon.png" />
+      <link rel="icon" href="/static/login/img/favicons/favicon.ico" />
+      <!-- Bootstrap Core CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link href="/static/js/plugins/materialize-css/css/materialize.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="/static/login/css/grayscale.css" rel="stylesheet">
+      <!-- Pricing Table CSS -->
+      <link href="/static/css/profile_reg.css" rel="stylesheet">
+
+      <link href="/static/css/main.css" rel="stylesheet">
+
+      <!-- Custom Fonts -->
+      <link href="/static/login/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   </head>
+   <style>
+      html, body {margin: 0; height: 100%; overflow: hidden}
+   </style>
+   <body id="page-top" class="bg1">
+      <!-- Main Start -->
+      <main class="site-content">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+         <!-- Pricing Style2 (BG Image) Start -->
+         <section class="sec-spacer bg2">
+            <div class="container">
+               <div class="row profile-reg">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8 col-sm-8">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col s12 m7">
+                        <div class="card">
+                          <div class="card-header bg-blue bg-inverse bg1" style="padding:10px;color:antiquewhite">
+                              <h2>
+                                    <i span class="fa fa-twitter fa_logo fa-lg"></i>
+                                    <span>Company Profile</span>
+                              </h2>
+                          </div>
+                          <div class="card-content">
+                            <div class="row">
+                                <form class="col s12" id="reg-form" action="/save-reg-form" method="post">
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <input id="company_name" type="text" name="company_name" class="validate" required>
+                                      <label for="company_name">Company Name</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <input id="company_code" type="text" name="company_code" class="validate" required>
+                                      <label for="company_code">Company Code</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                      <input id="division_code" type="text" name="division_code" class="validate" required>
+                                      <label for="division_code">Division Code</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <input id="company_address" type="text" name="company_address" class="validate" required>
+                                      <label for="company_address">Company Address</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input id="email" type="email" name="email" class="validate" required>
+                                      <label for="email">Email</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                      <input id="company_phone_no" type="number" name="company_phone_no" class="validate" required>
+                                      <label for="company_phone_no">Company Contact No</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <button class="btn btn-large btn-register waves-effect waves-light pull-right" type="submit" onsubmit="saveCompProfile()">Go To Payment
+                                        <i class="material-icons right">send</i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-2"></div>
+               </div>
+            </div>
+         </section>
+         <!-- Pricing Style2 (BG Image) End -->
+      </main>
+      <!-- Main End -->
+      <!-- jQuery -->
+      <script src="/static/socket.io/socket.io-1.3.5.js"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+      <!-- Bootstrap Core JavaScript -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script src="/static/js/plugins/materialize-css/js/materialize.js"></script>
+      <script src="/static/js/app/profile_reg.js"></script>
+   </body>
+</html>

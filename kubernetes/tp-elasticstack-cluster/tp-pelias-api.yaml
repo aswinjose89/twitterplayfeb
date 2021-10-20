@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-pelias-api
+  name: tp-pelias-api
+  namespace: tp-elasticstack-namespace
+spec:
+  selector:
+    matchLabels:
+      app: tp-pelias-api
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tp-pelias-api
+    spec:
+      containers:
+      - command: [ "sh", "-c", "cd /home/pelias/api && node index.js" ]
+        image: aswin1906/tp-pelias-build:1.0
+        name: tp-pelias-api
+        ports:
+        - containerPort: 3100
+        resources: {}
+        volumeMounts:
+        - mountPath: /scripts
+          name: tp-pelias-api-claim
+      restartPolicy: Always
+      volumes:
+      - name: tp-pelias-api-claim
+        persistentVolumeClaim:
+          claimName: tp-pelias-api-claim
+status: {}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-pelias-api-claim
+  name: tp-pelias-api-claim
+  namespace: tp-elasticstack-namespace
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-pelias-api-svc
+  name: tp-pelias-api-svc
+  namespace: tp-elasticstack-namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 3100
+    targetPort: 3100
+    nodePort: 30010
+  selector:
+    app: tp-pelias-api
+status:
+  loadBalancer: {}

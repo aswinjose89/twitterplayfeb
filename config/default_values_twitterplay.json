@@ -1,0 +1,21 @@
+{
+  "language_list_file":"language_list.json",
+  "no_of_retweets_tobe_displayed": 50,
+  "no_of_retweets_tobe_stored_in_file": 500,
+  "no_of_hashtags_tobe_displayed": 100,
+  "no_of_keywords_tobe_displayed": 100,
+  "no_of_keywords_tobe_stored_in_file": 10000,
+  "no_of_instagram_photos_tobe_displayed": 100,
+  "no_of_influential_users_tobe_displayed": 50,
+  "no_of_influential_users_tobe_stored_in_file":300000,
+  "no_of_influential_users_tobe_displayed_for_follow":500,
+  "no_of_active_users_tobe_displayed": 50,
+  "no_of_active_users_tobe_stored_in_file": 300000,
+  "no_of_active_users_tobe_displayed_for_follow":500,
+  "no_of_most_mentioned_users_tobe_displayed": 50,
+  "no_of_most_mentioned_users_tobe_stored_in_file": 300000,
+  "no_of_most_mentioned_users_tobe_displayed_for_follow":500,
+  "sentiment_tool_to_be_used": "140",
+  "tweets_storage_limit": 1000,
+  "basic_license_type_tweet_limit":50000
+}

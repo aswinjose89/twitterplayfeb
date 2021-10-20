@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tp-mongodb-configmap
+  # namespace: tp-mongo-namespace
+data:
+  database_url: tp-mongodb-0.tp-mongodb-svc, tp-mongodb-1.tp-mongodb-svc

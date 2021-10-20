@@ -1,0 +1,47 @@
+<div class="modal fade" id="role_mapping_modal" role="dialog">
+		<link rel="stylesheet" href="/static/js/plugins/selectize/css/selectize.default.css">
+    <script src="/static/js/plugins/selectize/selectize.js"></script>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header bg-blue">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">User Role Mapping</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h4>Please select user from the list</h4>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="control-group">
+                    <label style="font-weight:bold">Users</label>
+                    <select id="all_users" placeholder="Select the users..."></select>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- <script>
+              $('#all_users').selectize({
+                   plugins: ['remove_button'],
+                    maxItems: null,
+                    valueField: 'id',
+                    labelField: 'title',
+                    searchField: 'title',
+                    options: [
+                      {id: 1, title: 'Srini'},
+                      {id: 2, title: 'Baskar'},
+                      {id: 3, title: 'Aswin'}
+                    ],
+                    create: false
+                  });
+      </script> -->
+
+      </div>
+      <div class="modal-footer modal-footer-style">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="tweetActions(this,'ROL_MAP',event)">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

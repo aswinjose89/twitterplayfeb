@@ -1,0 +1,225 @@
+/*
+#title           : mycss.css
+#description     : Custom CSS for front-end
+#author		       : Nikul Prajapati
+#email           : nikulprajapati90@gmail.com
+#date            : 20160210
+#version         : 1.2
+*/
+
+.btn-sm-custom {
+    padding: 1px 2px ;
+}
+
+.timerContainer{
+    zoom: 1;
+    -moz-transform: scale(1)
+}
+
+
+.panel-heading{line-height:2px;}
+
+.panel-height {
+  height: 40px; / change according to your requirement/
+}
+
+.panel-height-with-button {
+  height: 55px; / change according to your requirement/
+}
+
+.responseTime {
+  /*display: block;
+  font-size: 1.5em;
+  -webkit-margin-before: 0.83em;
+  -webkit-margin-after: 0.83em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;*/
+  font-weight: bold;
+}
+
+body{
+    background-color:#060606;
+    padding-top: -20px;
+    word-wrap:break-word;
+}
+/*.todolist{
+    background-color:#FFF;
+    padding:20px 20px 10px 20px;
+    margin-top:30px;
+}*/
+
+.fa_logo{
+	color: #FFFFFF;
+}
+
+.top-buffer { margin-top:20px; }
+
+.align-me-bottom {
+  float: none;
+  display: table-cell;
+  vertical-align: bottom;
+  border:3px solid pink;
+}
+
+.todolist h1{
+    margin:0;
+    padding-bottom:20px;
+    text-align:center;
+}
+.form-control{
+    border-radius:0;
+}
+li.ui-state-default{
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #ddd;
+}
+
+li.ui-state-default:last-child{
+    border-bottom:none;
+}
+
+.your-clock{
+  zoom: 0.25;
+  -moz-transform: scale(0.5)
+}
+
+.todo-footer{
+    background-color:#F4FCE8;
+    margin:0 -20px -10px -20px;
+    padding: 10px 20px;
+}
+
+#sortable li{
+    padding:2px 0;
+    border-bottom:1px solid #ddd;
+}
+
+#sortable li:last-child{
+    border-bottom:none;
+}
+
+#checkAll{
+  margin-top:10px;
+}
+
+html, body, #map-canvas {
+  height: 80%;
+  margin: 0px;
+  padding: 0px
+}
+
+/* all map containers must be full height */
+/* row class height is set manually for map related row*/
+html, body, .container-fluid, .map { height: 100% }
+
+
+/*D3 cloud style */
+text {font: 10px sans-serif;}
+
+#map-canvas {
+   width:100%;
+   height: 100%;
+}
+
+.column-bg{
+    background-color:#000000;
+}
+
+#main, #mainNeg, #mainPos, #mainNeutral, #live_tweets_window
+{
+  margin:1px 1px 0px 1px;
+  padding:1px;
+  height:500px;
+
+}
+
+.topKClass{
+  height: 35%;
+}
+
+
+#retweets_window{
+  margin:1px 1px 0px 1px;
+  padding:1px;
+  height:35%;
+}
+
+.main, .live_tweets_window
+{
+  margin:1px 1px 0px 1px;
+  padding:1px;
+  height:100%;
+
+}
+
+.cliente {
+  margin-top:10px;
+  border: #cdcdcd medium solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.img-ul {
+    margin: 0;
+    overflow-x: scroll;
+    white-space:nowrap;
+}
+
+.retweet-ul {
+    margin: 0;
+    overflow-y: scroll;
+}
+
+.img-li {
+    display: inline-block;
+	width: 60px;
+	height:60px;
+	/*background:lavender;*/
+}
+
+.cover-container {
+    height: 180px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.cover-item {
+    position: relative;
+    display: inline-block;
+    margin: 8px 8px;
+    box-shadow: 2px 2px 4px #bbb;
+    border-top-right-radius: 4px;
+    width: 116px;
+    height: 158px;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#loading-indicator {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url(/static/img/misc/loading.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+}

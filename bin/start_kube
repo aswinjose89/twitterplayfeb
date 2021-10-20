@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec NODE_ENV='kube' PORT=9094 WINSTON_PORT=9095 NODE_HOST='twitterplay-svc' MONGO_CONN_URL='mongodb://tp-mongodb-0-svc.tp-mongo-namespace:27017/twitterplay' PELIAS_HOST='tp-pelias-api-svc.tp-elasticstack-namespace' RABBIT_MQ_CONN_URL='guest:guest@tp-rabbitmq-svc:5678' node --no-warnings --no-deprecation --max_old_space_size=8000 server.js

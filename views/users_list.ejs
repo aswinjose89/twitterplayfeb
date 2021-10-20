@@ -1,0 +1,151 @@
+<!--
+#title           : index.ejs
+#description     : Home page
+#author		       : Nikul Prajapati
+#email           : nikulprajapati90@gmail.com
+#date            : 20150717
+#version         : 1.0
+-->
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+  <title>Users List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta http-equiv="pragma" content="no-cache"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/static/bootbox/css/main.css">
+  <link rel="stylesheet" href="/static/mycss.css">
+  <style>.retweet:hover{opacity:0.9}</style>
+  <link rel="stylesheet" href="/static/users_list.css">
+  <link rel="stylesheet" href="/static/bootbox/css/main.css">
+
+  <script type="text/javascript">
+    var result = <%-users_data%>;
+    var appSettings = <%- appSettings %>;
+  </script>
+  <style>
+      .loader {
+      	position: fixed;
+      	left: 0px;
+      	top: 0px;
+      	width: 100%;
+      	height: 100%;
+      	z-index: 9999;
+      	background: url('/static/images/ripple.gif') 50% 50% no-repeat rgb(249,249,249);
+      }
+      .text { display:block; width:200px; height:100px; position:absolute; font-weight:bold; z-index:20;}
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+
+  <div class="bb-alert alert alert-info" style="display:none;">
+    <span style="length:100%">The examples populate this alert with dummy content</span>
+  </div>
+
+  <div class="container-fluid">
+    <div class="well text-center well-sm">
+      <div class="row" style="vertical-align: bottom;">
+        <div class="col-md-4 text-left todolist">
+          <div class="row">
+             <div class="col-md-12">
+             </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <h2><span class="fa fa-twitter"></span> <%=page_name%></h2>
+        </div>
+
+        <div class="col-md-4 text-right">
+          <div class="row">
+            <div class="col-md-6 text-right">
+              <img src="<%= user.twitter.imageUrl  %>" alt="Profile Image" class="img-rounded" style="width:30px; height:30px;"/>
+            </div>
+            <div class="col-md-6 text-left">
+              <h4 class="text-info"><span class="fa fa-twitter"></span> <strong><%= user.twitter.displayName%></strong><br> @<%= user.twitter.username  %></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <!-- <button type="button" class="btn btn-default btn-sm" onclick="logout()">
+                Logout
+              </button> -->
+              <!-- <a href="/logout" onclick="logout()" class="btn btn-default btn-sm">Logout</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="well well-sm">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-btn" style="width:40%;">
+                  <button class="btn btn-primary" style="width:100%" id="top_k_users_btn" type="button">Show Top </button>
+              </span>
+              <input type="text" id='top_k_users_input' class="form-control" placeholder="Enter number">
+              <div class="input-group-addon">users</div>
+            </div>
+            <div id="number_validate_msg"></div>
+        </div>
+        <div class="col-md-4">
+          <div style="width: 30%;float: left;">
+            <button type="button" class="btn-twitter" style="border-radius: 18px;" onclick="changeFriendship('create')"><i class="fa fa-twitter fa_logo fa-lg"></i> Follow selected users</button>
+            <div id="follow_selected_msg_1"></div>
+          </div>
+          <div style="width: 40%;float: left;">
+            <button type="button" style="border-radius: 18px;" class="btn-twitter" onclick="changeFriendship('destroy')"><i class="fa fa-twitter fa_logo fa-lg"></i> Unfollow selected users</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mainRow" class="row">
+
+    </div>
+    <div class="row" style="margin: 50px 0px 50px 0px;">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <button type="button" class="btn-twitter" style="width:100%;" onclick="loadMoreItems(false, 0)"><i class="fa fa-spinner" aria-hidden="true"></i> Load more items</button>
+      </div>
+      <div class="col-md-4">
+        <div style="width: 30%;float: left;">
+          <button type="button" class="btn-twitter" style="border-radius: 18px;" onclick="changeFriendship('create')"><i class="fa fa-twitter fa_logo fa-lg"></i> Follow selected users</button><br>
+          <div id="follow_selected_msg_2"></div>
+        </div>
+        <div style="width: 40%;float: left;">
+          <button type="button" class="btn-twitter" style="border-radius: 18px;" onclick="changeFriendship('destroy')"><i class="fa fa-twitter fa_logo fa-lg"></i> Unfollow selected users</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+  <script type="text/javascript" src="/static/users_list.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="/static/bootbox/bootbox.min.js"></script>
+  <script type="text/javascript">
+     loadMoreItems(false, 0);
+     $(document).ready(function() {
+         $("#top_k_users_btn").click(function(){
+             loadMoreItems(true, $('#top_k_users_input').val());
+         });
+     });
+
+  </script>
+  <script type="text/javascript">
+  $(window).load(function() {
+  	$(".loader").fadeOut("slow");
+  })
+  </script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</body>
+</html>

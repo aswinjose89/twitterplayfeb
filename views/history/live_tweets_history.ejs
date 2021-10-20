@@ -1,0 +1,339 @@
+<!--
+   #title           : live_tweets_history.ejs
+   #description     : Tweets history
+   #author		    : Aswin
+   #email           : aswin1906@gmail.com
+   #date            : 20190501
+   #version         : 1.2
+   -->
+<!-- views/history/live_tweets_history.ejs -->
+<!doctype html>
+<html lang="en">
+<html class="app-ui" ng-app="tweetHistory">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- Document title -->
+    <title>Processed Tweets History</title>
+    <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework"/>
+    <meta name="author" content="rustheme"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <!--    Starts Header Script-->
+        <% include ../master_pages/header_script %>
+        <link rel="stylesheet" href="/static/js/plugins/selectize/css/selectize.default.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/r-2.1.0/se-1.2.0/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" >
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/themes/base/jquery-ui.css" >
+  
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" > -->
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" > -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <!-- AngularJS Material CSS using GitCDN to load directly from `bower-material/master` -->
+        <link rel="stylesheet" type="text/css" href="https://gitcdn.xyz/cdn/angular/bower-material/master/angular-material.css"/>
+    <!--    Ends Header Script-->
+    <!-- End Stylesheets -->
+    <script>
+      var appSettings = <%- appSettings %>;
+    </script>
+    <style>
+        #tweet_histry_dt_processing{
+            z-index: 1;
+        }
+        md-tabs.md-primary>md-tabs-wrapper{
+            background-color: #358ed7;
+        }
+        .tab-height{
+            height: 400px !important;
+        }
+    </style>
+</head>
+<body class="app-ui layout-has-drawer layout-has-fixed-header" ng-controller="tweetHistoryController as histCtrl" ng-cloak="">
+    <div class="bb-alert alert" style="display:none;">
+        <span style="length:100%">The examples populate this alert with dummy content</span>
+    </div>
+    <img id="loading-indicator" name="Loader">
+<div class="app-layout-canvas">
+    <div class="app-layout-container">
+        <!-- Drawer -->
+
+        <!-- End drawer -->
+        <!-- Header -->
+            <% include ../master_pages/header %>
+        <!-- End header -->
+        <main class="app-layout-content" style="padding-left: 0px">
+            <div class="wrapper">
+                <!-- Page Content  -->
+                <div id="content" style="margin-left:auto;margin-right:auto">
+                    <div class="row">
+                            <div class="col-lg-6">
+                              <div class="card" style="box-shadow: 0px 1px 4px 3px #171719;border-radius: 8px;padding-bottom: 24px;">
+                                  <div class="row">
+                                        <div class="col-lg-12" style="padding: 15px">
+                                            
+                                                <md-tabs class="md-primary tab-height" md-selected="filterSelectedIndex" md-align-tabs="'top'">
+                                                        <md-tab id="searchTab1">
+                                                          <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Date Wise</md-tab-label>
+                                                          <md-tab-body>
+                                                                <md-content class="md-padding">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 dropdwn-cover" style="background: rgb(230, 230, 230)">
+                                                                                        <div><label style="padding:10px;font-weight: bold;">Created Date</label></div>
+                                                                                        <div id="date_reportrange" name="datefilter" class="daterange">
+                                                                                            <i class="fa fa-calendar"></i>
+                                                                                            <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row" ng-show="histCtrl.isDateWiseKeywords">
+                                                                                <div class="col-md-12 dropdwn-cover" style="background: rgb(230, 230, 230)">
+                                                                                        <div><label style="padding:10px;font-weight: bold;">Custom Keywords</label></div>
+                                                                                        <select id="date_custom_keys" placeholder="Select the keyword..."></select>
+                                                                                </div>
+                                                                              </div>
+                                                                              <div class="row">
+                                                                                <div class="col-md-3" style="margin: 10px;">
+                                                                                        <button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="histCtrl.searchHistory(this)">
+                                                                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                                                                            Search
+                                                                                        </button>
+                                                                                  </div>
+                                                                              </div>
+                                                                    </md-content>
+                                                          </md-tab-body>
+                                                        </md-tab>      
+                                                        <md-tab id="searchTab2">
+                                                          <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Session Wise</md-tab-label>
+                                                          <md-tab-body>
+                                                                <div class="card-block">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 dropdwn-cover" style="background: rgb(230, 230, 230)">
+                                                                                    <div><label style="padding:10px;font-weight: bold;">Created Date</label></div>
+                                                                                    <div id="session_reportrange" name="datefilter" class="daterange">
+                                                                                        <i class="fa fa-calendar"></i>
+                                                                                        <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 dropdwn-cover" style="background: rgb(230, 230, 230)">
+                                                                                    <div><label style="padding:10px;font-weight: bold;">Keyword Sessions</label></div>
+                                                                                    <select id="all_keyword_sessions" placeholder="Select the session..."></select>
+                                                                            </div>
+                                                                        </div>
+                                                                      <div class="row">
+                                                                          <div class="col-md-12 dropdwn-cover" id="custom_key_display_toggle" ng-show="histCtrl.isSessionWiseKeywords" style="background: rgb(230, 230, 230)">
+                                                                                  <div><label style="padding:10px;font-weight: bold;">Custom Keywords</label></div>
+                                                                                  <select id="session_custom_keys" placeholder="Select the keyword..."></select>
+                                                                          </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                          <div class="col-md-3" style="margin: 10px;">
+                                                                                <button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="histCtrl.searchHistorySessionWise(this)">
+                                                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                                                    Search
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                          </md-tab-body>
+                                                        </md-tab>
+                                                      </md-tabs>
+                                        </div>
+                                      
+                                  </div>
+                              </div>
+                             </div>
+                             <div class="col-lg-6">
+                                <div class="card" style="box-shadow: 0px 1px 4px 3px #171719;border-radius: 8px;padding-bottom: 24px;">
+                                    <div class="row">
+                                        <div class="col-lg-12" style="padding: 15px;">
+                                            <md-tabs class="md-primary tab-height" md-selected="cloudSelectedIndex" md-align-tabs="'top'">
+                                                <md-tab id="cloud_tab1">
+                                                  <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Top Keywords cloud</md-tab-label>
+                                                  <md-tab-body>
+                                                    <md-content class="md-padding">
+                                                            <div class="container-middle" id="wordcloud" style="height:100%"></div>
+                                                    </md-content>
+                                                  </md-tab-body>
+                                                </md-tab>      
+                                                <md-tab id="cloud_tab2">
+                                                  <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Top Hashtags Cloud</md-tab-label>
+                                                  <md-tab-body>
+                                                        <md-content class="md-padding">
+                                                            <div class="container-middle" id="hashtag_wordcloud" style="height:100%"></div>
+                                                        </md-content>
+                                                  </md-tab-body>
+                                                </md-tab>
+                                              </md-tabs>
+                                        </div>
+                                    </div>
+                                </div>
+                               </div>
+                             
+                        </div>
+                        <div class="row" ng-if="histCtrl.influentialData.length>0 || histCtrl.activeData.length>0">
+                            <div class="col-lg-12">
+                                <div class="card" style="box-shadow: 0px 1px 4px 3px #171719;border-radius: 8px;padding-bottom: 24px;">
+                                    <div class="row">
+                                        <div class="col-lg-12" style="padding: 15px;">
+                                            <md-tabs class="md-primary tab-height" md-selected="usersSelectedIndex" md-align-tabs="'top'">
+                                                <md-tab id="users_tab1">
+                                                  <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Most Influential Users</md-tab-label>
+                                                  <md-tab-body>
+                                                    <md-content class="md-padding bg-gradient-grey">
+                                                            <div class="form-group">
+                                                                    <div class="row">
+                                                                            <div class="col-xs-12">
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-3 pull-right">
+                                                                                                <a class="btn btn-primary"href="history_influential_users" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                                                                                        <i class="fa fa-external-link"></i><span style="margin-left:2px">Follow multiple users</span>
+                                                                                                    </a>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                </br>
+                                                                                <profile-card ng-if="histCtrl.influentialData.length>0" profile-data="histCtrl.influentialData" user-follow-up="histCtrl.SinglefollowOrUnfollowUser(data)"></profile-card>                        
+                                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                    </md-content>
+                                                  </md-tab-body>
+                                                </md-tab>      
+                                                <md-tab id="users_tab2">
+                                                  <md-tab-label><i class="fa fa-twitter fa_logo fa-lg"></i>Most Active Users</md-tab-label>
+                                                  <md-tab-body>
+                                                        <md-content class="md-padding bg-gradient-grey">
+                                                                <div class="form-group">
+                                                                        <div class="row">
+                                                                                <div class="col-xs-12">
+                                                                                        <div class="row">
+                                                                                                <div class="col-xs-3 pull-right">
+                                                                                                        <a class="btn btn-primary" href="history_active_users" target="_blank" role="button" style="box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);border-radius:20px;padding: 2px 6px 2px 6px;font-size: 10pt;background:rgb(16,108,200)">
+                                                                                                                <i class="fa fa-external-link"></i><span style="margin-left:2px">Follow multiple users</span>
+                                                                                                              </a>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                        </br>
+                                                                                        <profile-card ng-if="histCtrl.activeData.length>0" profile-data="histCtrl.activeData" user-follow-up="histCtrl.SinglefollowOrUnfollowUser(data)"></profile-card>                      
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                        </md-content>
+                                                  </md-tab-body>
+                                                </md-tab>
+                                              </md-tabs>
+                                        </div>
+                                    </div>
+                                </div>
+                               </div>
+                        </div>
+
+                    <div class="row" id="historyTable">
+                            <div class="col-lg-12">
+                              <div class="card" style="box-shadow: 0px 1px 4px 3px #171719;border-radius: 8px;padding-bottom: 24px;">
+                                  <div class="card-header bg-blue bg-inverse" style="padding:12px;">
+                                      <h5>
+                                        <label>
+                                              <i class="fa fa-twitter fa_logo fa-lg">Tweets History Table</i>
+                                          </label>
+                                        </h5>
+                                      <ul class="card-actions">
+                                          <li>
+                                              <button type="button" data-toggle="card-action"
+                                                      data-action="content_toggle"></button>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="row">
+                                      <div class="card-block">
+                                          <div class="col-md-14">
+                                                <table id="tweet_histry_dt" class="display" width="100%" style="border-left: 2px solid lightgray;border-right: 2px solid lightgray;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Profile Image</th>
+                                                            <th>Name</th>
+                                                            <th>ScreenName</th>
+                                                            <th>Search Keywords</th>
+                                                            <th>Tweets</th>
+                                                            <th>Followers</th>
+                                                            <th>Following</th>
+                                                            <th>Update Status</th>
+                                                            <th class="none">Tweet CreatedAt</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>                                            
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                             </div>
+                        </div>
+                </div>
+            </div>
+       </main>
+    <!-- Footer -->
+        <% include ../master_pages/footer %>
+    <!-- End Footer -->
+    <!-- .app-layout-container -->
+</div>
+
+<!-- .app-layout-canvas -->
+<!-- Apps Modal -->
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>-->
+
+<!-- Opens from the button in the header -->
+    <% include ../modals/apps-modal %>
+
+<!-- End Apps Modal -->
+<div class="app-ui-mask-modal"></div>
+<!-- AppUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock and App.js -->
+<!-- <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script> -->
+<!--    Starts Footer Script-->
+     <!-- AngularJS Material Dependencies -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-animate.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-aria.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-messages.min.js"></script>
+ 
+     <!-- AngularJS Material Javascript using GitCDN to load directly from `bower-material/master` -->
+     <script src="https://gitcdn.xyz/cdn/angular/bower-material/master/angular-material.js"></script>
+ 
+    <% include ../master_pages/footer_script %>
+    <script src="/static/js/plugins/selectize/selectize.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.12/r-2.1.0/se-1.2.0/datatables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+    <!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <!-- highcharts -->
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.src.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.src.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.src.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.src.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+
+    <script src="../static/js/app/services/remoteCall.js"></script>
+    <script src="../static/js/app/directives/directives.js"></script>
+    <script src="/static/js/utils/mixin.js"></script>
+    <script src="../static/js/app/history/live_tweets_history.js"></script>
+<!--    Ends Footer Script-->
+<!-- Page JS Plugins -->
+<% include ../modals/role_mapping_modal %>
+</div>
+</body>
+</html>

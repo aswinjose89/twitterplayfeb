@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-rabbitmq
+  name: tp-rabbitmq
+  namespace: tp-namespace
+spec:
+  selector:
+    matchLabels:
+      app: tp-rabbitmq
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tp-rabbitmq
+    spec:
+      containers:
+      - image: aswin1906/tp-rabbitmq:3.6.8
+        name: tp-rabbitmq
+        ports:
+        - containerPort: 15672
+        - containerPort: 5672
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-rabbitmq-svc
+  name: tp-rabbitmq-svc
+  namespace: tp-namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    name: "15678"
+    port: 15678
+    targetPort: 15672
+  - protocol: TCP
+    name: "5678"
+    port: 5678
+    targetPort: 5672
+    nodePort: 30001
+  selector:
+    app: tp-rabbitmq
+status:
+  loadBalancer: {}

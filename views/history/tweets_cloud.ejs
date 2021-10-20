@@ -1,0 +1,232 @@
+<!--
+   #title           : live_tweets_history.ejs
+   #description     : Tweets history
+   #author		      : Aswin
+   #email           : aswin1906@gmail.com
+   #date            : 20190501
+   #version         : 1.2
+   -->
+<!-- views/history/tweets_cloud.ejs -->
+<!doctype html>
+<html lang="en">
+<html class="app-ui">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- Document title -->
+    <title>User Specific Tweets Word Cloud</title>
+    <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework"/>
+    <meta name="author" content="rustheme"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <!--    Starts Header Script-->
+        <% include ../master_pages/header_script %>
+        <link rel="stylesheet" href="/static/users_list.css">
+    <!--    Ends Header Script-->
+    <script>
+      var appSettings = <%- appSettings %>;
+    </script>
+</head>
+<body class="app-ui layout-has-drawer layout-has-fixed-header">
+    <div class="app-layout-canvas">
+        <div class="app-layout-container">
+              <!-- Starts Header -->
+                  <% include ../master_pages/header %>
+              <!-- End header -->
+              <main class="full-layout-content">
+                  <div class="wrapper">
+                      <!-- Starts Page Content  -->
+                          <div id="content" class="container-center">
+                            <div class="twPc-div" style="height:100%;margin-bottom: 15px;box-shadow: -1px 1px 5px 6px rgba(0,0,0,0.61);">
+
+                              <% if(twitterUserProfile.profile_banner_url){ %>
+                                  <a class="twPc-bg twPc-block" style="background-image: url(<%= twitterUserProfile.profile_banner_url %>/600x200);" >
+                                  </a>
+                              <% } else{ %>
+                                  <a class="twPc-bg twPc-block">
+                                  </a>
+                              <% } %>
+                               <div>
+                                  <div class="twPc-button">
+                                     <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+                                     <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" style="position: static; visibility: visible; width: 79px; height: 28px;" title="Twitter Follow Button" src="https://platform.twitter.com/widgets/follow_button.d753e00c3e838c1b2558149bd3f6ecb8.en.html#dnt=true&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=<%= twitterUserProfile.screen_name %>&amp;show_count=false&amp;show_screen_name=false&amp;size=l&amp;time=1562252830258" data-screen-name="<%= twitterUserProfile.screen_name %>"></iframe>
+                                     <script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                                     <!-- Twitter Button -->
+                                  </div>
+                                  <a title="<%= twitterUserProfile.name %>" href="https://twitter.com/<%= twitterUserProfile.screen_name %>" class="twPc-avatarLink" target="_blank">
+                                  <img alt="<%= twitterUserProfile.name %>" src="<%= twitterUserProfile.profile_image_url_https %>" class="twPc-avatarImg">
+                                  </a>
+                                  <div class="twPc-divUser">
+                                     <div class="twPc-divName">
+                                        <a href="https://twitter.com/<%= twitterUserProfile.screen_name %>" target="_blank"><%= twitterUserProfile.name %></a>
+                                     </div>
+                                     <span>
+                                     <a href="https://twitter.com/<%= twitterUserProfile.screen_name %>" target="_blank" style="font-size: 14px;">@<span><%= twitterUserProfile.screen_name %></span></a>
+                                     </span>
+                                  </div>
+                                  <div class="twPc-divStats">
+                                     <ul class="twPc-Arrange">
+                                        <li class="twPc-ArrangeSizeFit">
+                                           <a target="_blank" href="https://twitter.com/<%= twitterUserProfile.screen_name %>" title="<%= twitterUserProfile.screen_name %> Tweet">
+                                           <span class="twPc-StatLabel twPc-block">Tweets</span>
+                                           <span class="twPc-StatValue"><%= twitterUserProfile.statuses_count %></span>
+                                           </a>
+                                        </li>
+                                        <li class="twPc-ArrangeSizeFit">
+                                           <a target="_blank" href="https://twitter.com/<%= twitterUserProfile.screen_name %>/following" title="<%= twitterUserProfile.screen_name %> Following">
+                                           <span class="twPc-StatLabel twPc-block">Following</span>
+                                           <span class="twPc-StatValue"><%= twitterUserProfile.friends_count %></span>
+                                           </a>
+                                        </li>
+                                        <li class="twPc-ArrangeSizeFit">
+                                           <a href="https://twitter.com/<%= twitterUserProfile.screen_name %>/followers" title="<%= twitterUserProfile.screen_name %> Followers" target="_blank">
+                                           <span class="twPc-StatLabel twPc-block">Followers</span>
+                                           <span class="twPc-StatValue"><%= twitterUserProfile.followers_count %></span>
+                                           </a>
+                                        </li>
+                                        <li class="twPc-ArrangeSizeFit">
+                                           <a href="#" title="<%= twitterUserProfile.language %>" target="_blank">
+                                           <span class="twPc-StatLabel twPc-block">Language</span>
+                                           <span class="twPc-StatValue"><%= twitterUserProfile.language %></span>
+                                           </a>
+                                        </li>
+                                        <li class="twPc-ArrangeSizeFit">
+                                           <a href="#" title="New Delhi, India">
+                                           <span class="twPc-StatLabel twPc-block">Location</span>
+                                           <span class="twPc-StatValue" style="display:flex">
+                                           <img src="/static/images/location2.png" height="auto" width="auto">
+                                           <span class="twPc-StatValue" style="margin-left:4px"><%= twitterUserProfile.location %></span>
+                                           </span>
+                                           </a>
+                                        </li>
+                                     </ul>
+                                  </div>
+                                  <div style="padding:8px;background: #f0e8e8;;line-height: normal;border-top: 1px solid #ded9d9;border-radius: 0px 0px 6px 6px;">
+                                    <div style="position: relative;top: 10px;height: 115px;">
+                                          <div class="col-md-4">
+                                          </div>
+                                          <div class="col-md-4 dropdwn-cover">
+                                              <div class="row">
+                                                <div class="col-md-3" style="padding:10px">
+                                                    <span style="float:right">Total Tweets</span>
+                                                  </div>
+                                                  <div class="col-md-8">
+                                                      <select class="form-control" id="totalTwts" onchange="getKeywordsAndHashtags()">
+                                                          <option value="50">Last 50 tweets</option>
+                                                          <option value="100">Last 100 tweets</option>
+                                                          <option value="150">Last 150 tweets</option>
+                                                        </select>
+                                                    </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                          </div>
+                                    </div>
+                                      <div class="row">
+                                            <div class="col-lg-6">
+                                                <!-- Top Keywords cloud -->
+                                                <div class="card">
+                                                    <div class="card-header bg-blue bg-inverse">
+                                                        <h5>
+                                                          <label for="max_retweets_ul">
+                                                                <i span class="fa fa-twitter fa_logo fa-lg">
+                                                                  </i>
+                                                                  <span>Top Keywords cloud</span>
+                                                              </label>
+                                                        </h5>
+                                                        <ul class="card-actions">
+                                                            <li>
+                                                                <button type="button" data-toggle="card-action" onclick="getTopKeywordsFile()" data-action="refresh_toggle"
+                                                                        data-action-mode="demo"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                                            </li>
+
+                                                            <li>
+                                                                <button type="button" data-toggle="card-action"
+                                                                        data-action="content_toggle"></button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                                              onsubmit="return false;">
+                                                            <div class="form-group">
+                                                                <div class="col-md-12">
+                                                                    <div class="container-middle" id="wordcloud" style="height: 700px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- .card-block -->
+                                                </div>
+                                                <!-- .card -->
+                                                <!-- End Top Keywords cloud -->
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                        <!-- Top Hashtags cloud -->
+                                                        <div class="card">
+                                                            <div class="card-header bg-blue bg-inverse">
+                                                                <h5><label for="max_retweets_ul"><i span class="fa fa-twitter fa_logo fa-lg"></span>Top
+                                                                            Hashtags Cloud</i></label></h5></i>
+                                                                <ul class="card-actions">
+                                                                    <li>
+                                                                        <button type="button" data-toggle="card-action" onclick="getTopKeywordsFile()" data-action="refresh_toggle"
+                                                                                data-action-mode="demo"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <button type="button" data-toggle="card-action"
+                                                                                data-action="content_toggle"></button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <form class="form-horizontal" action="base_forms_samples.html" method="post"
+                                                                      onsubmit="return false;">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <div class="container-middle" id="hashtag_wordcloud" style="height: 700px;"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- .card-block -->
+                                                        </div>
+                                                <!-- .card -->
+                                                <!-- End Top Hashtags Cloud  -->
+                                            </div>
+                                        </div>
+                                        <div id="tweets_cloud_cards">
+                                        </div>
+                                  </div>
+
+
+                               </div>
+                              </div>
+                          </div>
+                      <!-- End Page Content  -->
+                  </div>
+             </main>
+            <!-- Starts Footer -->
+                <% include ../master_pages/footer %>
+            <!-- End Footer -->
+          </div>
+          <!-- Starts Apps Modal -->
+              <% include ../modals/apps-modal %>
+              <div class="app-ui-mask-modal"></div>
+          <!-- End Apps Modal -->
+          <!--    Starts Footer Script-->
+              <% include ../master_pages/footer_script %>
+              <!-- highcharts -->
+              <script src="https://code.highcharts.com/highcharts.src.js"></script>
+              <script src="https://code.highcharts.com/highcharts-3d.src.js"></script>
+              <script src="https://code.highcharts.com/modules/exporting.src.js"></script>
+              <script src="https://code.highcharts.com/modules/export-data.src.js"></script>
+              <script src="https://code.highcharts.com/modules/wordcloud.src.js"></script>
+              <script src="../static/js/app/history/tweets_cloud.js"></script>
+          <!--    Ends Footer Script-->
+    </div>
+</body>
+</html>

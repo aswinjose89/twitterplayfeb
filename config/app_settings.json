@@ -1,0 +1,102 @@
+{
+  "appConfig": {
+    "node_machine": "localhost:9091",
+    "mongodb_machine": "localhost:27017",
+    "mongodb_conn_string": "mongodb://localhost:27017/twitterplay?replicaSet=rs0",
+    "dbname": "twitterplay",
+    "replicaSet": "rs0",
+    "protocol": "http",
+    "static_url": "/static",
+    "download_path": "/media/files",
+    "pelias_machine": "http://localhost:3100",
+    "rabbit_mq_machine": "guest:guest@twitterplay.southcentralus.cloudapp.azure.com:5672"
+  },
+  "twitterConfig": {
+    "twitter_consumer_key": "z6JqRXZMllBcY6DZhYkkc6l4S",
+    "twitter_consumer_secret": "jV2YUfIuk6zfnjAA4n1d52LpBoL0hNBVhbNtCwnK6evPSkZ4Q1"
+  },
+  "default_values_server": {
+    "language_list_file": "language_list.json",
+    "no_of_retweets_tobe_displayed": 50,
+    "no_of_retweets_tobe_stored_in_file": 500,
+    "no_of_hashtags_tobe_displayed": 100,
+    "no_of_keywords_tobe_displayed": 100,
+    "no_of_keywords_tobe_stored_in_file": 10000,
+    "no_of_instagram_photos_tobe_displayed": 100,
+    "no_of_influential_users_tobe_displayed": 50,
+    "no_of_influential_users_tobe_stored_in_file": 300000,
+    "no_of_influential_users_tobe_displayed_for_follow": 500,
+    "no_of_active_users_tobe_displayed": 50,
+    "no_of_active_users_tobe_stored_in_file": 300000,
+    "no_of_active_users_tobe_displayed_for_follow": 500,
+    "no_of_most_mentioned_users_tobe_displayed": 50,
+    "no_of_most_mentioned_users_tobe_stored_in_file": 300000,
+    "no_of_most_mentioned_users_tobe_displayed_for_follow": 500,
+    "sentiment_tool_to_be_used": "140",
+    "tweets_storage_limit": 1000,
+    "basic_license_type_tweet_limit": 50000
+  },
+  "default_values_client": {
+    "TRIAL_TWEETS_LIMIT": 150000,
+    "PASSWORD_TRIAL_VERSION": "123",
+    "WORD_CLOUD_REFRESH_DELAY": 10000,
+    "INITIAL_DELAY_TOP_K_MOST_INFLUENTIAL_USERS": 5000,
+    "INITIAL_DELAY_TOP_K_MOST_ACTIVE_USERS": 5000,
+    "INITIAL_DELAY_TOP_K_MOST_MENTIONED_USERS": 5000,
+    "INITIAL_DELAY_TOP_K_MAX_RETWEETS": 5000,
+    "INITIAL_DELAY_TOP_K_INSTA_PHOTOS": 5000,
+    "INITIAL_DELAY_TOP_K_SENTIMENT_COUNT": 5000,
+    "INITIAL_DELAY_TOP_K_LANG_STAT": 5000,
+    "FINAL_DELAY_TOP_K_MOST_INFLUENTIAL_USERS": 30000,
+    "FINAL_DELAY_TOP_K_MOST_ACTIVE_USERS": 30000,
+    "FINAL_DELAY_TOP_K_MOST_MENTIONED_USERS": 30000,
+    "FINAL_DELAY_TOP_K_MAX_RETWEETS": 30000,
+    "FINAL_DELAY_TOP_K_INSTA_PHOTOS": 10000,
+    "FINAL_DELAY_TOP_K_LANG_STAT": 30000,
+    "DEFAULT_NUMBER": 0,
+    "DELAY_CHECK_FOR_MAX_LIMIT": 500,
+    "MAX_LIMIT": 625000,
+    "AUTOSAVE_RECORDLIMIT": 100000,
+    "AUTOEXIT_BUFFERLIMIT": 8000,
+    "LANGUAGES_FOR_DISPLAY": [
+      "en",
+      "fr",
+      "de",
+      "es",
+      "it",
+      "hi",
+      "id",
+      "zh",
+      "ja",
+      "ar",
+      "ur",
+      "ko",
+      "vi",
+      "th",
+      "nl",
+      "ru",
+      "tr",
+      "pt",
+      "fa"
+    ],
+    "TWEETS_STORAGE_LIMIT": 1000,
+    "CUSTOM_KEYWORD_LIMITS": 400
+  },
+  "nodemailer": {
+    "service": "gmail",
+    "auth": {
+      "user": "aswin1906@gmail.com",
+      "clientId": "438682579803-1i940c9uvprgtbb7f476hcf6c28rd686.apps.googleusercontent.com",
+      "clientSecret": "tCS8v411IOKpe-ceS16mBqG-",
+      "refreshToken": "1/gdbd3MGjl_3vB0v2s0lVuqkMphDUFVqgkqS_TcFpIPRk_RHwAIm9gP1vAXlNe8dU",
+      "accessToken": "ya29.GltRB_1Q4cXn_XWli337erP_4AfjAc_cUBd7H4R_o97Xv-CvfEjVVG7DsflRMSI7GCy6e5OYQvjDA2qXiks9wLdYvIq-fUbwKvwSwJffyivABD4Z4bz41hjo8b84"
+    }
+  },
+  "payment":{
+    "amount":10000,
+    "currency": "USD",
+    "accessToken": "EAAAEJraoNVF99T5KJBMpCg1hFtsEzHr5OJmJxojwhhwjJvUDMuXYwU6xYcxrj54",
+    "basePath": "https://connect.squareupsandbox.com"
+  },
+  "version":1
+}

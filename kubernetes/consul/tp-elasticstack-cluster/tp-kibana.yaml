@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-kibana
+  name: tp-kibana
+  # namespace: tp-elasticstack-namespace
+spec:
+  selector:
+    matchLabels:
+      app: tp-kibana
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tp-kibana
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+    spec:
+      containers:
+      - image: kibana:6.8.3
+        name: tp-kibana
+        env:
+        - name: ELASTICSEARCH_HOSTS
+          value: http://tp-elasticsearch-svc:9200
+        ports:
+        - containerPort: 5601
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tp-kibana-svc
+  name: tp-kibana-svc
+  annotations:
+    'consul.hashicorp.com/service-sync': 'true'
+  # namespace: tp-elasticstack-namespace
+spec:
+  # type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5601
+    targetPort: 5601
+    # nodePort: 30012
+  selector:
+    app: tp-kibana
+status:
+  loadBalancer: {}

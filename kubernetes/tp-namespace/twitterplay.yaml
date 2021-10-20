@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: twitterplay
+  name: twitterplay
+  namespace: tp-namespace
+spec:
+  selector:
+    matchLabels:
+      app: twitterplay
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: twitterplay
+    spec:
+      containers:
+      - command: [ "sh", "-c", "NODE_ENV='kube' PORT=9094 WINSTON_PORT=9095 NODE_HOST='twitterplay-svc' MONGO_CONN_URL='mongodb://tp-mongodb-0-svc.tp-mongo-namespace:27017/twitterplay?replicaSet=rs0' PELIAS_HOST='tp-pelias-api-svc.tp-elasticstack-namespace' RABBIT_MQ_CONN_URL='guest:guest@tp-rabbitmq-svc:5678' node --no-warnings --no-deprecation --max_old_space_size=8000 server.js" ]
+        image: aswin1906/twitterplay:1.0
+        name: twitterplay
+        ports:
+        - containerPort: 9091
+        resources: {}
+        volumeMounts:
+        - mountPath: /scripts
+          name: twitterplay-claim
+      restartPolicy: Always
+      volumes:
+      - name: twitterplay-claim
+        persistentVolumeClaim:
+          claimName: twitterplay-claim
+status: {}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    app: twitterplay-claim
+  name: twitterplay-claim
+  namespace: tp-namespace
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: twitterplay-svc
+  name: twitterplay-svc
+  namespace: tp-namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "9091"
+    protocol: TCP
+    port: 9091
+    targetPort: 9091
+    nodePort: 30000
+  selector:
+    app: twitterplay
+status:
+  loadBalancer: {}

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tp-mongo-express
+  # namespace: tp-mongo-namespace
+  labels:
+    app: tp-mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tp-mongo-express
+  template:
+    metadata:
+      labels:
+        app: tp-mongo-express
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+    spec:
+      containers:
+      - name: tp-mongo-express
+        image: aswin1906/tp-mongo-express:1.0
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ME_CONFIG_BASICAUTH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: tp-mongodb-secret
+              key: mongo-express-password
+        - name: ME_CONFIG_BASICAUTH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: tp-mongodb-secret
+              key: mongo-express-username
+        - name: ME_CONFIG_MONGODB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: tp-mongodb-configmap
+              key: database_url
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tp-mongo-express-svc
+  annotations:
+    'consul.hashicorp.com/service-sync': 'true'
+  # namespace: tp-mongo-namespace
+spec:
+  selector:
+    app: tp-mongo-express
+  # type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 9093
+      targetPort: 8081
+      # nodePort: 30005

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec node --trace-warnings --trace-events-enabled --trace-event-file-pattern 'logger/node_trace/node-trace-${pid}-${rotation}.log' -r node-report --max_old_space_size=8000 server.js

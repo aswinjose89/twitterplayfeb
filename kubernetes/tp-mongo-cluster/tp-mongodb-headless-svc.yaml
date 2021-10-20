@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: tp-mongodb-svc
+  name: tp-mongodb-svc
+  namespace: tp-mongo-namespace
+spec:
+  clusterIP: None
+  ports:
+    - port: 27017
+      targetPort: 27017
+      name: tp-mongodb
+  selector:
+    app: tp-mongodb

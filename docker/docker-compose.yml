@@ -1,0 +1,112 @@
+version: "3"
+services:
+  tp-rabbitmq:
+    image: aswin1906/tp-rabbitmq:3.6.8
+    container_name: tp-rabbitmq
+    ports:
+      - 15678:15672
+      - 5678:5672
+    networks:
+      - tp-network
+
+  tp-elasticsearch:
+    image: aswin1906/tp-elasticsearch-6.8.3:1.0
+    container_name: tp-elasticsearch
+    ports:
+      - 9200:9200
+    networks:
+      - tp-network
+
+  tp-pelias-api:
+    image: aswin1906/tp-pelias-build:1.0
+    container_name: tp-pelias-api
+    ports:
+      - 3100:3100
+    networks:
+      - tp-network
+    volumes:
+      - .:/scripts
+    entrypoint: [ "bash", "/scripts/run_pelias.sh"]
+
+  tp-mongo-master:
+    hostname: tp-mongo-master
+    container_name: tp-mongo-master
+    image: aswin1906/tp-mongodb4.0:1.0
+    expose:
+      - 27017
+    networks:
+      - tp-network
+    restart: always
+    entrypoint: [ "mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    volumes:
+      - ~/tpData/master:/data/db
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo --host tp-mongo-master:27017 --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  tp-mongo-slave:
+    hostname: tp-mongo-slave
+    container_name: tp-mongo-slave
+    image: aswin1906/tp-mongodb4.0:1.0
+    expose:
+      - 27017
+    networks:
+      - tp-network
+    restart: always
+    entrypoint: [ "mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    volumes:
+      - ~/tpData/slave:/data/db
+
+  tp-mongo-setup:
+    image: aswin1906/tp-mongodb4.0:1.0
+    container_name: tp-mongo-setup
+    depends_on:
+      - tp-mongo-master
+      - tp-mongo-slave
+    volumes:
+      - .:/scripts
+    networks:
+      - tp-network
+    restart: "no"
+    entrypoint: [ "bash", "/scripts/mongo_setup.sh"]
+
+  tp-mongo-express:
+    image: aswin1906/tp-mongo-express:1.0
+    container_name: tp-mongo-express
+    depends_on:
+      - tp-mongo-master
+      - tp-mongo-slave
+      - tp-mongo-setup
+    ports:
+      - 9093:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=tp-mongo-master
+      - ME_CONFIG_BASICAUTH_USERNAME=twitterplay
+      - ME_CONFIG_BASICAUTH_PASSWORD=twitterplay
+    networks:
+      - tp-network
+    restart: always
+
+  twitterplay:
+    image: aswin1906/twitterplay:1.0
+    container_name: twitterplay
+    depends_on:
+      - tp-mongo-master
+      - tp-mongo-slave
+      - tp-rabbitmq
+      - tp-elasticsearch
+      - tp-pelias-api
+    volumes:
+      - .:/scripts
+    ports:
+      - 9091:9091
+    networks:
+      - tp-network
+    restart: always
+    entrypoint: [ "bash", "/scripts/node_script.sh"]
+
+networks:
+  tp-network:
+    driver: bridge

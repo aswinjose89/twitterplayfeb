@@ -1,0 +1,54 @@
+{
+  "esclient": {
+      "hosts": [{
+        "env": "development",
+        "protocol": "http",
+        "host": "localhost",
+        "port": 9200
+      }]
+    },
+    "api": {
+      "services": {
+        "placeholder": {
+          "url": "http://localhost:3000"
+        },
+        "libpostal": {
+          "url": "http://localhost:8080"
+        },
+        "pip": {
+          "url": "http://localhost:3102"
+        },
+        "interpolation": {
+          "url": "http://localhost:3000"
+        }
+      }
+    },
+    "imports": {
+      "adminLookup": {
+        "enabled": true
+      },
+      "geonames": {
+        "datapath": "/home/users/aswin1906/projects/geo/pelias/geonames"
+      },
+      "openstreetmap": {
+        "datapath": "/home/users/aswin1906/projects/geo/pelias/openstreetmap",
+        "leveldbpath": "/tmp",
+        "import": [
+          {
+            "filename": "planet.osm.pbf"
+          }
+        ]
+      },
+      "openaddresses": {
+        "datapath": "/home/users/aswin1906/projects/geo/pelias/openaddresses",
+        "files": []
+      },
+      "whosonfirst": {
+        "datapath": "/home/users/aswin1906/projects/geo/pelias/whosonfirst"
+      },
+      "polyline": {
+        "datapath": "/home/users/aswin1906/projects/geo/pelias/polyline",
+        "files": []
+      }
+    }
+  }

@@ -1,0 +1,68 @@
+<header class="app-layout-header" style="padding-left: 0px">
+    <nav class="navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div id="logo" class="drawer-header">
+                            <a href="http://tweetzoomui.azurewebsites.net/" target="new">
+                                <img class="img-responsive" src="/static/img/logo/logo-backend.png"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="transform: translateY(23%)">
+                        <h3 style="margin:0px;padding: 11px 0px 10px 208px;font-family:fantasy;"><%= title %></h3>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapse" data-toggle="collapse"
+                                            data-target="#header-navbar-collapse" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <ul class="nav navbar-nav navbar-left navbar-toolbar hidden-sm hidden-xs">
+                                    <li>
+                                        <!-- Opens the modal found at the bottom of the page -->
+                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#apps-modal"><i
+                                                    class="ion-grid"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Start Profile-logout -->
+                                <ul id="main-menu" class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown" style="padding-top:0px;padding-bottom:0px">
+                                            <img src="<%= user.twitter.imageUrl %>" alt=""
+                                                 style="width:30px; height:30px;" class="img-rounded"/>
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu btn btn-pill " style="background-color: #358ed7;">
+                                            <li>
+                                                <a type="button" class="btn btn-pill btn-app-blue-outline"
+                                                   onclick="logout()" href="javascript:void(0)">Profile</a>
+                                                <!-- <a href="/logout" onclick="logout()" class="btn btn-color:#7dc855;">Logout</a> -->
+                                                <a type="button" class="btn btn-pill btn-app-blue-outline"
+                                                   onclick="logout()" href="javascript:void(0)">Blog</a>
+                                                <!-- <a href="/logout" onclick="logout()" class="btn btn-color:#7dc855;">Logout</a> -->
+                                                <a type="button" class="btn btn-pill btn-app-blue-outline"
+                                                   onclick="logout()" href="javascript:void(0)">Logout</a>
+                                                <!-- <a href="/logout" onclick="logout()" class="btn btn-pill btn-app-blue-outline">Logout</a> -->
+                                            </li>
+                                        </ul>
+                                </ul>
+                                <!-- End Profile-logout -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <!-- .navbar-default -->
+</header>
